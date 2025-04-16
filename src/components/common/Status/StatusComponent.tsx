@@ -1,6 +1,5 @@
 import { Box, Button, Typography } from "@mui/material";
-import successImage from "../../../assets/success.svg";
-import errorImage from "../../../assets/error.svg";
+
 
 export interface StatusComponentProps {
   variant: "success" | "danger";
@@ -18,8 +17,8 @@ const StatusComponent = ({
   href,
 }: StatusComponentProps) => {
   const imageMap = {
-    success: successImage,
-    danger: errorImage,
+    success: "/images/success.png",
+    danger: "/images/error.png",
   };
 
   const altText = variant === "success" ? "Success icon" : "Error icon";

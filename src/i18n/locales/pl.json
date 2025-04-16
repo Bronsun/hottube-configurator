@@ -1,0 +1,95 @@
+{
+  "common": {
+    "loading": "Ładowanie...",
+    "error": "Błąd",
+    "noResults": "Nie znaleziono wyników",
+    "save": "Zapisz",
+    "close": "Zamknij",
+    "back": "Powrót",
+    "language": "Język",
+    "cancel": "Anuluj"
+  },
+  "navbar": {
+    "home": "Strona główna",
+    "configurator": "Konfigurator",
+    "language": "Język"
+  },
+  "configurator": {
+    "title": "Konfigurator Wanien SPA",
+    "subtitle": "Przeglądaj naszą ofertę premium wanien SPA i dostosuj do swoich potrzeb",
+    "filters": {
+      "collection": "Kolekcja",
+      "sortBy": "Sortuj według",
+      "default": "Domyślne",
+      "priceLowHigh": "Cena (od najniższej)",
+      "priceHighLow": "Cena (od najwyższej)",
+      "seatsLowHigh": "Miejsca (od najmniejszej)",
+      "seatsHighLow": "Miejsca (od największej)"
+    },
+    "resultCount": "Znaleziono {{count}} model",
+    "resultCount_plural": "Znaleziono {{count}} modeli",
+    "noHotTubs": "Nie znaleziono wanien SPA spełniających podane kryteria",
+    "configure": "Konfiguruj"
+  },
+  "hottub": {
+    "detailTitle": "Dostosuj swoją wannę SPA",
+    "moveBack": "Wróć",
+    "selectShellColor": "Kolor powłoki",
+    "selectCabinetColor": "Kolor obudowy",
+    "waterCare": "System pielęgnacji wody",
+    "entertainment": "System rozrywki",
+    "control": "System sterowania",
+    "accessories": "Akcesoria",
+    "servicePackage": {
+      "title": "Pakiet serwisowy",
+      "none": "Bez pakietu serwisowego",
+      "noneDescription": "Tylko standardowa gwarancja producenta",
+      "oneYear": "Pakiet opieki rocznej",
+      "oneYearDescription": "Coroczna konserwacja i pielęgnacja wody",
+      "threeYear": "3-letni pakiet premium",
+      "threeYearDescription": "Pełny serwis i rozszerzona gwarancja",
+      "fiveYear": "5-letni pakiet Elite",
+      "fiveYearDescription": "Kompletna opieka i pokrycie części"
+    },
+    "accessoryOptions": {
+      "coverCradle": "Podnośnik pokrywy",
+      "coverCradleDescription": "Łatwy w użyciu podnośnik pokrywy zapewniający wygodny dostęp",
+      "steps": "Stopnie",
+      "stepsDescription": "Trwałe stopnie pasujące do koloru obudowy"
+    },
+    "summary": {
+      "title": "Podsumowanie",
+      "model": "Model",
+      "collection": "Kolekcja",
+      "shellColor": "Kolor powłoki",
+      "cabinetColor": "Kolor obudowy",
+      "seating": "Miejsca siedzące",
+      "waterCare": "Pielęgnacja wody",
+      "smartControl": "Inteligentne sterowanie",
+      "entertainment": "Rozrywka",
+      "accessories": "Akcesoria",
+      "servicePackage": "Pakiet serwisowy",
+      "basePrice": "Cena podstawowa",
+      "options": "Opcje",
+      "totalPrice": "Cena całkowita"
+    },
+    "actions": {
+      "saveConfig": "Zapisz konfigurację",
+      "generatePDF": "Generuj PDF",
+      "financing": "lub rata {{amount}} zł brutto / miesiąc *",
+      "share": "Udostępnij konfigurację wanny SPA",
+      "copyLink": "Skopiuj ten link, aby udostępnić swoją obecną konfigurację wanny SPA innym:"
+    },
+    "financingDetails": "Szczegóły finansowania na 3 lata (0,5% miesięcznie) - RRSO 6% w skali roku",
+    "financingTerm": "Okres: 36 miesięcy",
+    "financingAPR": "Rzeczywista roczna stopa oprocentowania: 6,0%",
+    "financingDisclaimer": "Finansowanie dostępne po zatwierdzeniu kredytu. Warunki mogą się różnić w zależności od dostawcy finansowania.",
+    "financingMaxLoan":"Maksymalna pożyczka: 50 000 PLN",
+    "financingUpfront":"Wymagana zaliczka w wysokości {{amount}} zł",
+    "emailForm": {
+      "title": "Wygeneruj PDF ze swoją konfiguracją wanny SPA",
+      "description": "Prosimy o podanie swoich danych kontaktowych, abyśmy mogli przesłać Ci wycenę i więcej informacji o wybranej wannie.",
+      "success": "Dziękujemy! Twój PDF jest teraz generowany."
+    }
+  }
+}

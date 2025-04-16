@@ -1,0 +1,95 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "Error",
+    "noResults": "No results found",
+    "save": "Save",
+    "close": "Close",
+    "back": "Back",
+    "language": "Language",
+    "cancel": "Cancel"
+  },
+  "navbar": {
+    "home": "Home",
+    "configurator": "Configurator",
+    "language": "Language"
+  },
+  "configurator": {
+    "title": "Hot Tub Configurator",
+    "subtitle": "Browse our selection of premium hot tubs and customize your perfect spa experience",
+    "filters": {
+      "collection": "Collection",
+      "sortBy": "Sort By",
+      "default": "Default",
+      "priceLowHigh": "Price (Low to High)",
+      "priceHighLow": "Price (High to Low)",
+      "seatsLowHigh": "Seats (Fewest to Most)",
+      "seatsHighLow": "Seats (Most to Fewest)"
+    },
+    "resultCount": "{{count}} model found",
+    "resultCount_plural": "{{count}} models found",
+    "noHotTubs": "No hot tubs found matching your criteria",
+    "configure": "Configure"
+  },
+  "hottub": {
+    "detailTitle": "Customize Your Hot Tub",
+    "moveBack": "Move Back",
+    "selectShellColor": "Shell Color",
+    "selectCabinetColor": "Cabinet Color",
+    "waterCare": "Water Care System",
+    "entertainment": "Entertainment System",
+    "control": "Control System",
+    "accessories": "Accessories",
+    "servicePackage": {
+      "title": "Service Package",
+      "none": "No Service Package",
+      "noneDescription": "Standard manufacturer warranty only",
+      "oneYear": "1-Year Care Package",
+      "oneYearDescription": "Annual maintenance and water care",
+      "threeYear": "3-Year Premium Package",
+      "threeYearDescription": "Full service and extended warranty",
+      "fiveYear": "5-Year Elite Package",
+      "fiveYearDescription": "Complete care and parts coverage"
+    },
+    "accessoryOptions": {
+      "coverCradle": "Cover Cradle",
+      "coverCradleDescription": "Easy-to-use cover lifter for convenient access", 
+      "steps": "Steps",
+      "stepsDescription": "Durable steps that match your cabinet color"
+    },
+    "summary": {
+      "title": "Summary",
+      "model": "Model",
+      "collection": "Collection",
+      "shellColor": "Shell Color",
+      "cabinetColor": "Cabinet Color", 
+      "seating": "Seating",
+      "waterCare": "Water Care",
+      "smartControl": "Smart Control",
+      "entertainment": "Entertainment",
+      "accessories": "Accessories",
+      "servicePackage": "Service Package",
+      "basePrice": "Base Price",
+      "options": "Options",
+      "totalPrice": "Total Price"
+    },
+    "actions": {
+      "saveConfig": "Save Config",
+      "generatePDF": "Generate PDF", 
+      "financing": "or {{amount}}/month financing*",
+      "share": "Share Your Hot Tub Configuration",
+      "copyLink": "Copy this link to share your current hot tub configuration with others:"
+    },
+    "financingDetails": "3-Year Financing Details (0.5% monthly)",
+    "financingTerm": "Term: 36 months",
+    "financingMaxLoan":"Max loan: 50,000 PLN",
+    "financingUpfront":"Required up front",
+    "financingDisclaimer": "Financing available upon credit approval. Terms may vary by financing provider.",
+    "financingAPR": "Annual Percentage Rate: 6.0%",
+    "emailForm": {
+      "title": "Generate Hot Tub Configuration PDF",
+      "description": "Please provide your contact details so we can send you a quote and more information about your selected hot tub.",
+      "success": "Thank you! Your PDF is being generated now."
+    }
+  }
+}

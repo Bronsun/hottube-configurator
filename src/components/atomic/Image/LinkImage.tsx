@@ -1,5 +1,5 @@
 import { Link } from "react-router";
-import defaultLogo from "../../../assets/logo.svg";
+import Logo from "../../../assets/MountSpa-logo.png";
 
 interface LinkImageProps {
   src?: string;
@@ -10,10 +10,10 @@ interface LinkImageProps {
 }
 
 const LinkImage = ({
-  src = defaultLogo,
+  src = Logo,
   alt = "Logo",
-  width = 60,
-  height = 40,
+  width = 130,
+  height = 70,
   href = "/panel",
 }: LinkImageProps) => {
   return (

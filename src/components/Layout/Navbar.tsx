@@ -1,64 +1,55 @@
-import { useState } from "react";
-import {
-  Box,
-  Stack,
-  IconButton,
-  Drawer,
-  useTheme,
-  useMediaQuery,
-} from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
-import NavigationMenu from "./TopMenu/NavigationMenu";
-import LinkImage from "../atomic/Image/LinkImage";
-import DrawerMenu from "./TopMenu/DrawerMenu";
-import { NavigationMenuItems } from "../../constants/routes";
-import FunctionalMenu from "./TopMenu/FunctionalMenu";
+import { AppBar, Box, Container, Link, Toolbar, useTheme} from '@mui/material';
+import { Link as RouterLink } from 'react-router';
+import { ROUTES } from '../../constants/routes';
+import {  useEffect } from 'react';
+import { loadHottubes } from '../../utils/hottubes';
 
 const Navbar = () => {
-  const [drawerOpen, setDrawerOpen] = useState(false);
   const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
-  const handleDrawerToggle = () => {
-    setDrawerOpen((prev) => !prev);
-  };
+  // Initial load - respects the current language instead of forcing Polish
+  useEffect(() => {
+    const initialLoad = async () => {
+      try {
+        // Load hottubes data with current language
+        await loadHottubes();
+      } catch (error) {
+        console.error('Failed to load initial hottub data:', error);
+      }
+    };
+    
+    initialLoad();
+  }, []);
+
+ 
 
   return (
-    <Box
-      component="nav"
+    <AppBar 
       sx={{
-        p: 1,
-        borderBottom: "1px solid",
-        borderColor: "border.main",
+        backgroundColor:"white",
+        position:'static',
+        boxShadow: 'none',
+        borderBottom: `1px solid ${theme.palette.divider}`,
       }}
     >
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <LinkImage />
-          {!isMobile && <NavigationMenu links={NavigationMenuItems} />}
-        </Stack>
-        <Stack direction="row" alignItems="center" spacing={2}>
-          <FunctionalMenu />
-          {isMobile && (
-            <IconButton
-              color="inherit"
-              onClick={handleDrawerToggle}
-              aria-label="open drawer"
-            >
-              <MenuIcon />
-            </IconButton>
-          )}
-        </Stack>
-      </Stack>
-      <Drawer
-        anchor="top"
-        open={drawerOpen}
-        onClose={handleDrawerToggle}
-        ModalProps={{ keepMounted: true }}
-      >
-        <DrawerMenu links={NavigationMenuItems} onClose={handleDrawerToggle} />
-      </Drawer>
-    </Box>
+      <Container maxWidth="xl">
+        <Toolbar disableGutters sx={{ justifyContent: 'space-between' }}>
+          <Link component={RouterLink} to={ROUTES.HOME} sx={{ textDecoration: 'none' }}>
+            <Box 
+              component="img" 
+              src="/src/assets/MountSpa-logo.png" 
+              alt="Mount Spa Logo" 
+              sx={{ 
+                height: 80, 
+                mr: 2,
+              }} 
+            />
+          </Link>
+          
+        
+        </Toolbar>
+      </Container>
+    </AppBar>
   );
 };
 

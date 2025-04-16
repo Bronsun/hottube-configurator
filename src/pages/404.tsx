@@ -10,7 +10,7 @@ const NotFound = () => {
       title="An error has occured"
       message="404 Page not found"
       buttonText="Go back to dashboard"
-      href={ROUTES.PANEL}
+      href={ROUTES.CONFIGURATOR}
       />
     </Box>
   );
