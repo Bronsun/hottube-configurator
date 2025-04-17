@@ -70,15 +70,15 @@ export const loadHottubes = async (): Promise<HotTube[]> => {
     // Get current language from localStorage, defaulting to English if not set
     const currentLang = localStorage.getItem('i18nextLng') || 'en';
     
-    // Check if we have data in localStorage and if it's for the current language
-    const localData = localStorage.getItem("hottubsData");
-    if (localData) {
+    // Check if we have data in sessionStorage and if it's for the current language
+    const sessionData = sessionStorage.getItem("hottubsData");
+    if (sessionData) {
       try {
-        const parsedData = JSON.parse(localData);
+        const parsedData = JSON.parse(sessionData);
         // Only use cached data if the language matches the current language
         if (parsedData.language === currentLang && 
             parsedData.hottubes && Array.isArray(parsedData.hottubes)) {
-          console.log(`Loaded hottubes data from localStorage for ${currentLang}`);
+          console.log(`Loaded hottubes data from sessionStorage for ${currentLang}`);
           hottubData = parsedData.hottubes;
           if (parsedData.accessories && Array.isArray(parsedData.accessories)) {
             accessoriesData = parsedData.accessories;
@@ -88,9 +88,9 @@ export const loadHottubes = async (): Promise<HotTube[]> => {
           }
           return hottubData;
         }
-      } catch (localError) {
-        console.error('Error parsing localStorage data:', localError);
-        // Continue to fetch from file if localStorage parsing fails
+      } catch (sessionError) {
+        console.error('Error parsing sessionStorage data:', sessionError);
+        // Continue to fetch from file if sessionStorage parsing fails
       }
     }
     
@@ -117,8 +117,8 @@ export const loadHottubes = async (): Promise<HotTube[]> => {
         servicePackagesData = data.servicePackages;
       }
       
-      // Store the data in localStorage for faster subsequent loads
-      localStorage.setItem('hottubsData', JSON.stringify({
+      // Store the data in sessionStorage for faster subsequent loads
+      sessionStorage.setItem('hottubsData', JSON.stringify({
         hottubes: hottubData,
         accessories: accessoriesData,
         servicePackages: servicePackagesData,
@@ -284,12 +284,13 @@ export const getHottubsByCollection = (collection: string): HotTube[] => {
  * @param ascending If true, sorts from smallest to largest capacity
  */
 export const sortHottubsBySeating = (hottubes: HotTube[], ascending: boolean = true): HotTube[] => {
-  return [...hottubes].sort((a) => {
+  return [...hottubes].sort((a, b) => {
     // Extract the number from strings like "6 Adults", "2 Adults"
     const seatsA = parseInt(a.seating.split(' ')[0]);
+    const seatsB = parseInt(b.seating.split(' ')[0]);
     
-    // Return just the seats value for comparison
-    return ascending ? seatsA : -seatsA;
+    // Return comparison based on ascending or descending order
+    return ascending ? seatsA - seatsB : seatsB - seatsA;
   });
 };
 
@@ -298,11 +299,12 @@ export const sortHottubsBySeating = (hottubes: HotTube[], ascending: boolean = t
  * @param ascending If true, sorts from lowest to highest price
  */
 export const sortHottubsByPrice = (hottubes: HotTube[], ascending: boolean = true): HotTube[] => {
-  return [...hottubes].sort((a) => {
-    // Remove $ and commas from price strings like "$8,999", "$26,999"
-    const priceA = parseFloat(a.price.replace('$', '').replace(',', ''));
-    const priceB = parseFloat(a.price.replace('$', '').replace(',', ''));
+  return [...hottubes].sort((a, b) => {
+    // Parse prices, handling cases with or without currency symbols and with commas
+    const priceA = parseFloat(a.price.replace(/[$€£]/g, '').replace(/,/g, ''));
+    const priceB = parseFloat(b.price.replace(/[$€£]/g, '').replace(/,/g, ''));
     
+    // Return comparison based on ascending or descending order
     return ascending ? priceA - priceB : priceB - priceA;
   });
 };
@@ -316,7 +318,7 @@ export const getPriceRange = (hottubes: HotTube[]): {min: number, max: number} =
   }
   
   const prices = hottubes.map(hottub => 
-    parseFloat(hottub.price.replace('$', '').replace(/,/g, ''))
+    parseFloat(hottub.price.replace(/[$€£]/g, '').replace(/,/g, ''))
   );
   
   return {

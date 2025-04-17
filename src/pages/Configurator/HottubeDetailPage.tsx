@@ -243,7 +243,7 @@ const HottubeDetailPage = () => {
   const handleCopyLinkSuccess = () => {
     setSnackbar({
       open: true,
-      message: t('hottub.linkCopied', "Link copied to clipboard!"),
+      message: t('hottub.linkCopied', "Link zapisany do schowka"),
       severity: "success",
     });
   };
@@ -300,7 +300,7 @@ const HottubeDetailPage = () => {
     
     setSnackbar({
       open: true,
-      message: t('hottub.pdfGenerated', "PDF generated and downloaded!"),
+      message: t('hottub.pdfGenerated', "Wycena przygotowana do pobrania!"),
       severity: "success",
     });
   };

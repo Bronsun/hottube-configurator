@@ -35,7 +35,7 @@ const HottubCard = ({
   // Helper function to check if a hot tub has a lounge seat
   const hasLoungeSeat = () => {
     return hottub.extras?.some((extra) => 
-      extra.name.toLowerCase().includes('lounge') || 
+      extra.name.includes('Lezanka') || 
       extra.description.toLowerCase().includes('lounge seat') ||
       extra.value.toLowerCase().includes('lounge')
     );

@@ -1,4 +1,6 @@
 import { Box, Button } from "@mui/material";
+import { useState } from "react";
+import EmailFormModal from "./EmailFormModal";
 
 interface HottubeImageDisplayProps {
   model: string;
@@ -15,6 +17,22 @@ const HottubeImageDisplay = ({
   cabinetImage,
   cabinetColorName,
 }: HottubeImageDisplayProps) => {
+  const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
+  
+  const handleOpenEmailModal = () => {
+    setIsEmailModalOpen(true);
+  };
+  
+  const handleCloseEmailModal = () => {
+    setIsEmailModalOpen(false);
+  };
+  
+  const handleEmailSuccess = () => {
+    // You can add any actions to take after a successful email submission
+    // For example, redirect to the PDF or show a success message
+    window.open("https://mountspa.pl/wp-content/uploads/2025/04/caldera-catalog-mountspa.pdf", "_blank");
+  };
+
   return (
     <Box
       sx={{
@@ -79,21 +97,29 @@ const HottubeImageDisplay = ({
             href="https://omnisightinc.com/virtual-tours/watkins-wellness/caldera-spas-showroom-virtual-tour/"
             target="_blank"
             rel="noopener noreferrer"
+            sx={{ m: 1 }}
         >
           Spacer wirtualny 360°
         </Button>
-  
-      </Box>
-      <Box sx={{mt:2}}>
-      <Button 
+        <Button 
             variant="contained"  
-            href="https://mountspa.pl/wp-content/uploads/2025/04/caldera-catalog-mountspa.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+            onClick={handleOpenEmailModal}
+            sx={{ m: 1 }}
         >
          Katalog PDF
         </Button>
       </Box>
+      <Box sx={{mt:2}}>
+     
+      </Box>
+      
+      {/* Email Modal */}
+      <EmailFormModal
+        open={isEmailModalOpen}
+        onClose={handleCloseEmailModal}
+        onSuccess={handleEmailSuccess}
+        hottubModel={model}
+      />
     </Box>
   );
 };

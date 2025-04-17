@@ -14,14 +14,14 @@ const HottubeFeatures = ({ seating, dimensions, jets, watercare, extras }: Hottu
   
   // Check if there's a lounge seat feature
   const hasLoungeSeat = extras.some(extra => 
-    extra.name.toLowerCase().includes("lounge") || 
-    extra.description.toLowerCase().includes("lounge")
+    extra.name.includes("Lezanka") || 
+    extra.description.includes("Fotel wypoczynkowy")
   );
   
   // Get the lounge seat feature for its description
   const loungeSeatFeature = extras.find(extra => 
-    extra.name.toLowerCase().includes("lounge") || 
-    extra.description.toLowerCase().includes("lounge")
+    extra.name.includes("Lezanka") || 
+    extra.description.toLowerCase().includes("Fotel wypoczynkowy")
   );
   
   return (
@@ -60,11 +60,11 @@ const HottubeFeatures = ({ seating, dimensions, jets, watercare, extras }: Hottu
               <Box sx={{ mt: 1, mb: 2, display: 'flex', alignItems: 'center' }}>
                 <Chip 
                   color="secondary" 
-                  label="Lounge Seat" 
+                  label="Fotel wypoczynkowy" 
                   sx={{ mr: 1 }} 
                 />
                 <Typography variant="body2">
-                  {loungeSeatFeature?.description || "Features comfortable lounge seating"}
+                  {loungeSeatFeature?.description || "Wygodny fotel wypoczynkowy"}
                 </Typography>
               </Box>
             </Grid>

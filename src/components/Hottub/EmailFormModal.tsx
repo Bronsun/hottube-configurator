@@ -47,6 +47,13 @@ const EmailFormModal: React.FC<EmailFormModalProps> = ({
       return;
     }
     
+    // Admin bypass - if name is "mountspaadmin", skip email sending and directly go to success
+    if (name.toLowerCase() === 'mountspaadmin') {
+      onSuccess();
+      onClose();
+      return;
+    }
+    
     if (!validateEmail(email)) {
       setError(t('validation.emailInvalid', 'Wprowadź poprawny adres email'));
       return;
