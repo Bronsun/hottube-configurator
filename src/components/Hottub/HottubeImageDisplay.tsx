@@ -8,6 +8,7 @@ interface HottubeImageDisplayProps {
   shellColorName: string;
   cabinetImage: string;
   cabinetColorName: string;
+  configLink?: string;
 }
 
 const HottubeImageDisplay = ({
@@ -16,6 +17,7 @@ const HottubeImageDisplay = ({
   shellColorName,
   cabinetImage,
   cabinetColorName,
+  configLink,
 }: HottubeImageDisplayProps) => {
   const [isEmailModalOpen, setIsEmailModalOpen] = useState(false);
   
@@ -54,6 +56,8 @@ const HottubeImageDisplay = ({
           textAlign: "center",
           maxWidth: "100%",
           margin: "0 auto", // Center image horizontally
+          position: model === "Aventine" ? "relative" : "static",
+          top: model === "Aventine" ? "40px" : "auto",
         }}
         src={shellImage}
         alt={`${model} shell - ${shellColorName}`}
@@ -85,6 +89,8 @@ const HottubeImageDisplay = ({
             position: "relative",
             maxWidth: "100%",
             margin: "0 auto", // Center image horizontally
+            transform: model === "Aventine" ? "scale(1.05)" : "none",
+            top: model === "Aventine" ? "-35px" : "auto",
           }}
           src={cabinetImage}
           alt={`${model} cabinet - ${cabinetColorName}`}
@@ -108,6 +114,7 @@ const HottubeImageDisplay = ({
         >
          Katalog PDF
         </Button>
+    
       </Box>
       <Box sx={{mt:2}}>
      
@@ -119,6 +126,7 @@ const HottubeImageDisplay = ({
         onClose={handleCloseEmailModal}
         onSuccess={handleEmailSuccess}
         hottubModel={model}
+        configLink={configLink}
       />
     </Box>
   );

@@ -5,6 +5,47 @@
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MountSPA Hot Tub Configurator</title>
+    
+    <!-- Google tag (gtag.js) with Consent Mode -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-4TR72GW5TF"></script>
+    <script>
+      // Set default consent - no cookies will be set until user consents
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      
+      // Default all consent settings to 'denied'
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'analytics_storage': 'denied',
+        'wait_for_update': 500 // Wait for the consent mechanism to update consent
+      });
+      
+      // Configure your analytics
+      gtag('config', 'G-4TR72GW5TF');
+    </script>
+    
+    <!-- Microsoft Clarity tracking with deferred loading -->
+    <script type="text/javascript">
+      // Define clarity function but don't initialize it immediately
+      window.clarity = window.clarity || function(...args) { 
+        (window.clarity.q = window.clarity.q || []).push(args); 
+      };
+      
+      // The actual clarity script will be loaded after consent
+      function loadClarity() {
+        var t = document.createElement('script');
+        t.async = 1;
+        t.src = "https://www.clarity.ms/tag/r63nekrurq";
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      }
+      
+      // Add clarity consent function
+      clarity.consent = function() {
+        loadClarity();
+      };
+    </script>
   </head>
   <body>
     <div id="root"></div>

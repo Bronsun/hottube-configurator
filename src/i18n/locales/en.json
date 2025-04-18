@@ -91,5 +91,25 @@
       "description": "Please provide your contact details so we can send you a quote and more information about your selected hot tub.",
       "success": "Thank you! Your PDF is being generated now."
     }
+  },
+  "cookieConsent": {
+    "title": "Cookie Settings",
+    "description": "We use cookies to enhance your experience on our website. By clicking \"Accept All\", you agree to the use of ALL cookies. Alternatively, you can choose which types of cookies you allow.",
+    "gdprInfo": "This site complies with GDPR regulations. You can change your preferences at any time by clicking on the Cookie Settings button in the footer of our website.",
+    "necessary": "Necessary",
+    "necessaryDescription": "These cookies are essential for the website to function properly and cannot be disabled.",
+    "analytics": "Analytics",
+    "analyticsDescription": "These cookies help us understand how visitors interact with our website, helping us improve our services.",
+    "marketing": "Marketing",
+    "marketingDescription": "These cookies are used to track visitors across websites to display relevant advertisements.",
+    "preferences": "Preferences",
+    "preferencesDescription": "These cookies enable personalized features and functionality on our website.",
+    "privacyInfo": "For more information, please read our",
+    "privacyPolicy": "Privacy Policy",
+    "necessaryOnly": "Necessary Only",
+    "savePreferences": "Save Preferences",
+    "acceptAll": "Accept All",
+    "settingsSaved": "Your cookie preferences have been saved!",
+    "cookieSettings": "Cookie Settings"
   }
 }

@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { validateEmail } from '../../utils/validate';
+import { Link } from 'react-router';
 
 interface EmailFormModalProps {
   open: boolean;
@@ -21,6 +22,7 @@ interface EmailFormModalProps {
   onSuccess: () => void;
   hottubModel: string;
   hottubConfig?: any; // Optional configuration data
+  configLink?: string; // Configuration link for sharing
 }
 
 const EmailFormModal: React.FC<EmailFormModalProps> = ({ 
@@ -28,7 +30,8 @@ const EmailFormModal: React.FC<EmailFormModalProps> = ({
   onClose, 
   onSuccess,
   hottubModel,
-  hottubConfig
+  hottubConfig,
+  configLink
 }) => {
   const { t } = useTranslation();
   const [name, setName] = useState('');
@@ -75,7 +78,8 @@ const EmailFormModal: React.FC<EmailFormModalProps> = ({
           phone,
           message,
           hottubModel,
-          hottubConfig: hottubConfig || {}
+          hottubConfig: hottubConfig || {},
+          configLink
         }),
       });
       
@@ -87,7 +91,7 @@ const EmailFormModal: React.FC<EmailFormModalProps> = ({
       } else {
         setError(data.message || t('errors.emailSendFailed', 'Nie udało się wysłać wiadomości'));
       }
-    } catch{
+    } catch {
       setError(t('errors.networkError', 'Błąd sieci. Spróbuj ponownie później.'));
     } finally {
       setLoading(false);
@@ -142,6 +146,11 @@ const EmailFormModal: React.FC<EmailFormModalProps> = ({
              placeholder='Telefon'
             required
           />
+
+        <Typography variant="body2" color="text.secondary">
+            Wysyłając formularz, zgadzasz się na przetwarzanie swoich danych osobowych zgodnie z naszą <Link to="https://mountspa.pl/polityka-prywatnosci/">polityką prywatności</Link> oraz  <Link to="https://mountspa.pl/regulamin/">regulaminem</Link> serwisu MountSPA.pl
+        
+        </Typography>
           
           
           <Button 

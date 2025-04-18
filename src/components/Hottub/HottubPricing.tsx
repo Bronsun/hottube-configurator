@@ -18,6 +18,7 @@ interface HottubPricingProps {
   onShare: () => void;
   onGeneratePDF: () => void;
   variant?: "compact" | "full";
+  configLink?: string;
 }
 
 const HottubPricing: React.FC<HottubPricingProps> = ({
@@ -31,6 +32,7 @@ const HottubPricing: React.FC<HottubPricingProps> = ({
   onShare,
   onGeneratePDF,
   variant = "full",
+  configLink,
 }) => {
   const { t } = useTranslation();
   const [emailFormOpen, setEmailFormOpen] = useState(false);
@@ -128,6 +130,7 @@ const HottubPricing: React.FC<HottubPricingProps> = ({
         onClose={() => setEmailFormOpen(false)}
         onSuccess={handleFormSuccess}
         hottubModel={hottub?.model || ''}
+        configLink={configLink}
       />
     </Box>
   );
@@ -138,6 +141,11 @@ const FinancingTooltip: React.FC<{ monthlyPayment: number; upfrontPayment: numbe
   upfrontPayment 
 }) => {
   const { t } = useTranslation();
+  
+  // Format numbers with spaces between thousands
+  const formatNumberWithSpaces = (num: number): string => {
+    return Math.round(num).toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+  };
   
   return (
     <Tooltip 
@@ -150,7 +158,7 @@ const FinancingTooltip: React.FC<{ monthlyPayment: number; upfrontPayment: numbe
           <Typography variant="body2">{t('hottub.financingDisclaimer', 'This is only simulation. Please contact our advisor')}</Typography>
           {upfrontPayment > 0 && (
             <Typography variant="body2" sx={{ color: 'warning.main' }}>
-              {t('hottub.financingUpfront', 'Required upfront: ${{amount}}', { amount: upfrontPayment.toLocaleString() })}
+              {t('hottub.financingUpfront', 'Required upfront: ${{amount}}', { amount: formatNumberWithSpaces(upfrontPayment) })}
             </Typography>
           )}
         </Box>
@@ -161,7 +169,7 @@ const FinancingTooltip: React.FC<{ monthlyPayment: number; upfrontPayment: numbe
         color="text.secondary" 
         sx={{ cursor: 'help', textDecoration: 'underline dotted' }}
       >
-        {t('hottub.actions.financing', { amount: Math.round(monthlyPayment).toLocaleString() })}
+        {t('hottub.actions.financing', { amount: formatNumberWithSpaces(monthlyPayment) })}
       </Typography>
     </Tooltip>
   );

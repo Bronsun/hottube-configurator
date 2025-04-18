@@ -1,22 +1,21 @@
 import {
   Typography,
   Box,
-  FormControl,
-  FormControlLabel,
-  RadioGroup,
-  Radio,
   Checkbox,
   Divider,
   Grid,
   Card,
   CardMedia,
   CardContent,
-  FormLabel,
   useTheme,
   useMediaQuery,
   Tooltip,
+  IconButton,
+  Popover,
 } from "@mui/material";
+import InfoIcon from "@mui/icons-material/Info";
 import { useTranslation } from "react-i18next";
+import { useState } from "react";
 
 // Define an Accessory interface to match the structure in the JSON
 interface Accessory {
@@ -82,6 +81,16 @@ const HottubeConfigOptions: React.FC<HottubeConfigOptionsProps> = ({
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
+  // State for the FreshWater info popover
+  const [freshWaterAnchorEl, setFreshWaterAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const handleFreshWaterPopoverOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setFreshWaterAnchorEl(event.currentTarget);
+  };
+  const handleFreshWaterPopoverClose = () => {
+    setFreshWaterAnchorEl(null);
+  };
+  const freshWaterPopoverOpen = Boolean(freshWaterAnchorEl);
+
   // Format price for display
   const formatPrice = (price: number): string => {
     if (price === 0) return t('hottub.includedPrice', '0');
@@ -114,7 +123,7 @@ const HottubeConfigOptions: React.FC<HottubeConfigOptionsProps> = ({
             return (
               <Grid item xs={4} sm={3} md={4} key={color.name}>
                 <Tooltip 
-                  title={isDisabled ? t('hottub.platinumShellNotAvailable', "Platinum shell is not available with Parchment cabinet in Utopia series") : ""}
+                  title={isDisabled ? t('hottub.platinumShellNotAvailable', "Platinum nie jest dostępne z Perchnament") : ""}
                   arrow
                   placement="top"
                 >
@@ -169,7 +178,7 @@ const HottubeConfigOptions: React.FC<HottubeConfigOptionsProps> = ({
               <Grid item xs={4} sm={3} md={4} key={color.color}>
                 <Tooltip 
                   title={wouldDisableCurrentShell ? 
-                    t('hottub.parchmentCabinetWillChangeShell', "Selecting Parchment cabinet will change your shell selection (Platinum not available)") : ""}
+                    t('hottub.parchmentCabinetWillChangeShell', "Platinum nie jest dostępne z Perchnament") : ""}
                   arrow
                   placement="top"
                 >
@@ -222,9 +231,58 @@ const HottubeConfigOptions: React.FC<HottubeConfigOptionsProps> = ({
       {/* Water Care Options */}
       {waterCareOptions.length > 0 && (
         <Box sx={{ mb: 4 }}>
-          <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-            {t('hottub.waterCare')}
-          </Typography>
+          <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+            <Typography variant="subtitle1" fontWeight="bold">
+              {t('hottub.waterCare')}
+            </Typography>
+            <IconButton 
+              size="small" 
+              onClick={handleFreshWaterPopoverOpen}
+              aria-describedby={freshWaterPopoverOpen ? 'freshwater-popover' : undefined}
+              sx={{ ml: 0.5, color: theme.palette.info.main }}
+            >
+              <InfoIcon fontSize="small" />
+            </IconButton>
+            <Popover
+              id="freshwater-popover"
+              open={freshWaterPopoverOpen}
+              anchorEl={freshWaterAnchorEl}
+              onClose={handleFreshWaterPopoverClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left',
+              }}
+            >
+              <Box sx={{ p: 3, maxWidth: 400 }}>
+                <Typography variant="h6" gutterBottom>Zapomnij o zgadywaniu, jak dbać o wodę!</Typography>
+                <Typography variant="body2" paragraph>
+                  Naszą misją jest pomoc w czerpaniu korzyści zdrowotnych z regularnego korzystania z wanny SPA poprzez ułatwienie pielęgnacji wody. Z systemami Caldera® możesz zmniejszyć użycie chemikaliów i zredukować zapach chloru, jednocześnie utrzymując wodę w wannie zdezynfekowaną, zdrową i gotową do użycia w każdej chwili.
+                </Typography>
+                
+                <Typography variant="subtitle1" gutterBottom sx={{ mt: 2, fontWeight: 'bold' }}>System FreshWater® IQ</Typography>
+                <Typography variant="body2" paragraph>
+                  FreshWater IQ to inteligentny system pielęgnacji wody, który regularnie bada wodę w Twoim SPA i wyświetla jasne instrukcje, aby pomóc Ci utrzymać czystą wodę o naturalnym odczuciu. Teraz, jednym spojrzeniem na panel sterowania, zobaczysz co jest potrzebne, aby woda w Twoim SPA była zawsze świeża, zbilansowana i gotowa do korzystania!
+                </Typography>
+                
+                <Typography variant="subtitle1" gutterBottom sx={{ mt: 2, fontWeight: 'bold' }}>System solny FreshWater®</Typography>
+                <Typography variant="body2" paragraph>
+                  Nasz unikalny i opatentowany projekt automatycznie generuje chlor z soli, utrzymując wodę czystą i świeżą do 3 razy dłużej niż jakikolwiek inny system. W końcu to Twoje SPA powinno dbać o Ciebie, a nie na odwrót.
+                </Typography>
+                <Typography variant="body2" paragraph>
+                  Ten łatwy w użyciu system jest dostępny we wszystkich modelach serii Utopia® i Paradise® wyprodukowanych od 2019 roku.
+                </Typography>
+                
+                <Typography variant="subtitle1" gutterBottom sx={{ mt: 2, fontWeight: 'bold' }}>Uzdatniacze wody</Typography>
+                <Typography variant="body2">
+                  Wykorzystaj w pełni swój system pielęgnacji wody z tymi bezchemicznymi akcesoriami, aby zapewnić sobie zawsze świeżą, czystą wodę.
+                </Typography>
+              </Box>
+            </Popover>
+          </Box>
           <Grid container spacing={2}>
             {waterCareOptions.map((option) => (
               <Grid item xs={12} sm={6} md={6} key={option.id}>
@@ -392,8 +450,8 @@ const HottubeConfigOptions: React.FC<HottubeConfigOptionsProps> = ({
           {t('hottub.accessories')}
         </Typography>
         <Grid container spacing={2}>
-          {availableAccessories.length > 0 ? (
-            availableAccessories.map((accessory) => (
+        
+         {   availableAccessories.map((accessory) => (
               <Grid item xs={12} sm={6} md={6} key={accessory.id}>
                 <Card 
                   onClick={() => {
@@ -455,160 +513,56 @@ const HottubeConfigOptions: React.FC<HottubeConfigOptionsProps> = ({
                   </CardContent>
                 </Card>
               </Grid>
-            ))
-          ) : (
-            // Fallback to old hardcoded accessories if no new ones are provided
-            <>
-              <Grid item xs={12} sm={6} md={6}>
-                <Card 
-                  onClick={() => {
-                    const event = {
-                      target: {
-                        name: 'coverCradle',
-                        checked: !accessories.coverCradle
-                      }
-                    } as React.ChangeEvent<HTMLInputElement>;
-                    handleAccessoryChange(event);
-                  }} 
-                  sx={{ 
-                    cursor: 'pointer',
-                    border: accessories.coverCradle ? `2px solid ${theme.palette.primary.main}` : 'none',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    p: 1
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    height={isMobile ? "120" : "140"}
-                    image={'https://www.calderaspas.com/wp-content/uploads/2024/05/caldera-spas-paradise-seycheles-articwhite-java-proliftiii-coverlifter.jpg'}
-                    alt={t('hottub.accessoryOptions.coverCradle')}
-                    sx={{ objectFit: 'cover', borderRadius: 2 }}
-                  />
-                  <CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <Typography variant="body2" fontWeight="medium">
-                        {t('hottub.accessoryOptions.coverCradle')}
-                      </Typography>
-                      <Checkbox 
-                        checked={accessories.coverCradle} 
-                        onChange={(e) => {
-                          const event = {
-                            target: {
-                              name: 'coverCradle',
-                              checked: e.target.checked
-                            }
-                          } as React.ChangeEvent<HTMLInputElement>;
-                          handleAccessoryChange(event);
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                        sx={{ p: 0.5 }}
-                      />
-                    </Box>
-                    <Typography variant="caption" color="text.secondary">
-                      {t('hottub.accessoryOptions.coverCradleDescription')}
-                    </Typography>
-                    <Typography variant="body2" color="primary" sx={{ mt: 1 }}>
-                      {formatPrice(300)}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-              <Grid item xs={12} sm={6} md={6}>
-                <Card 
-                  onClick={() => {
-                    const event = {
-                      target: {
-                        name: 'steps',
-                        checked: !accessories.steps
-                      }
-                    } as React.ChangeEvent<HTMLInputElement>;
-                    handleAccessoryChange(event);
-                  }} 
-                  sx={{ 
-                    cursor: 'pointer',
-                    border: accessories.steps ? `2px solid ${theme.palette.primary.main}` : 'none',
-                    height: '100%',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    p: 1
-                  }}
-                >
-                  <CardMedia
-                    component="img"
-                    height={isMobile ? "120" : "140"}
-                    image={'https://www.calderaspas.com/wp-content/uploads/2017/02/560x406-Avante-Step-Sand.jpg'}
-                    alt={t('hottub.accessoryOptions.steps')}
-                    sx={{ objectFit: 'cover', borderRadius: 2 }}
-                  />
-                  <CardContent>
-                    <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-                      <Typography variant="body2" fontWeight="medium">
-                        {t('hottub.accessoryOptions.steps')}
-                      </Typography>
-                      <Checkbox 
-                        checked={accessories.steps} 
-                        onChange={(e) => {
-                          const event = {
-                            target: {
-                              name: 'steps',
-                              checked: e.target.checked
-                            }
-                          } as React.ChangeEvent<HTMLInputElement>;
-                          handleAccessoryChange(event);
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                        sx={{ p: 0.5 }}
-                      />
-                    </Box>
-                    <Typography variant="caption" color="text.secondary">
-                      {t('hottub.accessoryOptions.stepsDescription')}
-                    </Typography>
-                    <Typography variant="body2" color="primary" sx={{ mt: 1 }}>
-                      {formatPrice(200)}
-                    </Typography>
-                  </CardContent>
-                </Card>
-              </Grid>
-            </>
-          )}
+            ))}
         </Grid>
       </Box>
 
       <Divider sx={{ my: 3 }} />
 
       {/* Service Package */}
-      <Box sx={{ mb: 3 }}>
-        <FormControl component="fieldset" fullWidth>
-          <FormLabel component="legend">
-            <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
-              {t('hottub.servicePackage.title')}
-            </Typography>
-          </FormLabel>
-          <RadioGroup
-            value={selectedServicePackageId}
-            onChange={(e) => setServicePackage(e.target.value)}
-          >
-            {servicePackages.map((packageOption) => (
-              <FormControlLabel
-                key={packageOption.id}
-                value={packageOption.id}
-                control={<Radio />}
-                label={
-                  <Box>
-                    <Typography variant="body2">
-                      {packageOption.name} {formatPrice(packageOption.price)}
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="subtitle1" fontWeight="bold" gutterBottom>
+          {t('hottub.servicePackage.title')}
+        </Typography>
+        <Grid container spacing={2}>
+          {servicePackages.map((packageOption) => (
+            <Grid item xs={12} sm={6} md={6} key={packageOption.id}>
+              <Card 
+                onClick={() => setServicePackage(packageOption.id)} 
+                sx={{ 
+                  cursor: 'pointer',
+                  border: selectedServicePackageId === packageOption.id ? `2px solid ${theme.palette.primary.main}` : 'none',
+                  height: '100%',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  p: 1
+                }}
+              >
+                <CardContent>
+                  <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                    <Typography variant="body2" fontWeight="medium">
+                      {packageOption.name}
                     </Typography>
-                    <Typography variant="caption" color="text.secondary">
-                      {packageOption.description}
-                    </Typography>
+                    <Checkbox 
+                      checked={selectedServicePackageId === packageOption.id} 
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setServicePackage(packageOption.id);
+                      }}
+                      sx={{ p: 0.5 }}
+                    />
                   </Box>
-                }
-              />
-            ))}
-          </RadioGroup>
-        </FormControl>
+                  <Typography variant="caption" color="text.secondary">
+                    {packageOption.description}
+                  </Typography>
+                  <Typography variant="body2" color="primary" sx={{ mt: 1 }}>
+                    {formatPrice(packageOption.price)} zł
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
       </Box>
     </Box>
   );

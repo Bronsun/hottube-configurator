@@ -91,5 +91,25 @@
       "description": "Prosimy o podanie swoich danych kontaktowych, abyśmy mogli przesłać Ci wycenę i więcej informacji o wybranej wannie.",
       "success": "Dziękujemy! Twój PDF jest teraz generowany."
     }
+  },
+  "cookieConsent": {
+    "title": "Ustawienia Plików Cookie",
+    "description": "Używamy plików cookie, aby ulepszyć Twoje doświadczenie na naszej stronie. Klikając \"Akceptuj Wszystkie\", zgadzasz się na użycie WSZYSTKICH plików cookie. Możesz również wybrać, które rodzaje plików cookie akceptujesz.",
+    "gdprInfo": "Ta strona jest zgodna z przepisami RODO. Możesz zmienić swoje preferencje w dowolnym momencie, klikając przycisk Ustawienia Cookie w stopce naszej strony.",
+    "necessary": "Niezbędne",
+    "necessaryDescription": "Te pliki cookie są niezbędne do prawidłowego funkcjonowania strony i nie mogą być wyłączone.",
+    "analytics": "Analityczne",
+    "analyticsDescription": "Te pliki cookie pomagają nam zrozumieć, w jaki sposób odwiedzający korzystają z naszej strony, pomagając nam ulepszać nasze usługi.",
+    "marketing": "Marketingowe",
+    "marketingDescription": "Te pliki cookie są używane do śledzenia odwiedzających na różnych stronach w celu wyświetlania odpowiednich reklam.",
+    "preferences": "Preferencje",
+    "preferencesDescription": "Te pliki cookie umożliwiają spersonalizowane funkcje i funkcjonalności na naszej stronie.",
+    "privacyInfo": "Aby uzyskać więcej informacji, przeczytaj naszą",
+    "privacyPolicy": "Politykę Prywatności",
+    "necessaryOnly": "Tylko Niezbędne",
+    "savePreferences": "Zapisz Preferencje",
+    "acceptAll": "Akceptuj Wszystkie",
+    "settingsSaved": "Twoje preferencje dotyczące plików cookie zostały zapisane!",
+    "cookieSettings": "Ustawienia Cookie"
   }
 }

@@ -1,17 +1,29 @@
 import { HotTube } from "../models/HotTubeModel";
-import { Accessory } from "./hottubes";
+import { Accessory, ServicePackage } from "./hottubes";
 
 // Define a more flexible AccessoriesState interface that can handle any accessory ID
 interface AccessoriesState {
   [key: string]: boolean;
 }
 
-// Global variable to cache accessories data for pricing calculations
+// Global data stores for accessories and service packages
 let accessoriesData: Accessory[] = [];
+let servicePackagesData: ServicePackage[] = [];
 
-// Function to initialize accessories data
-export const initializeAccessoriesData = (data: Accessory[]) => {
-  accessoriesData = data;
+/**
+ * Initialize accessories data
+ * @param accessories Array of accessories to use for pricing calculations
+ */
+export const initializeAccessoriesData = (accessories: Accessory[]): void => {
+  accessoriesData = accessories;
+};
+
+/**
+ * Initialize service packages data
+ * @param packages Array of service packages to use for pricing calculations
+ */
+export const initializeServicePackagesData = (packages: ServicePackage[]): void => {
+  servicePackagesData = packages;
 };
 
 /**
@@ -109,18 +121,28 @@ export const calculateAdditionalCosts = (
         additionalCost += accessory.price;
       }
     });
-  } else {
-    // Fallback to the old hardcoded approach if no accessories data is available
-    if (accessories.coverCradle) additionalCost += 300;
-    if (accessories.steps) additionalCost += 200;
   }
   
-  // Add service package costs
-  if (servicePackage === "one-year") additionalCost += 500;
-  if (servicePackage === "three-year") additionalCost += 1200;
-  if (servicePackage === "five-year") additionalCost += 1800;
+  // Add service package cost - using the global servicePackagesData array
+  if (servicePackage && servicePackage !== 'none' && servicePackagesData.length > 0) {
+    const selectedPackage = servicePackagesData.find(
+      pkg => pkg.id === servicePackage
+    );
+    if (selectedPackage) {
+      additionalCost += selectedPackage.price;
+    }
+  }
   
   return additionalCost;
+};
+
+/**
+ * Format number with spaces between thousands
+ * @param num Number to format
+ * @returns Formatted number string with spaces between thousands
+ */
+const formatNumberWithSpaces = (num: number): string => {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
 };
 
 /**
@@ -134,7 +156,7 @@ export const calculateTotalPrice = (
   accessories: AccessoriesState,
   servicePackage: string
 ): string => {
-  if (!hottub) return "$0";
+  if (!hottub) return "0 zł";
   
   const basePrice = parseFloat(
     hottub.price.replace("$", "").replace(/,/g, "")
@@ -149,7 +171,7 @@ export const calculateTotalPrice = (
     servicePackage
   );
   
-  return `${totalPrice.toLocaleString()} zł brutto`;
+  return `${formatNumberWithSpaces(totalPrice)} zł brutto`;
 };
 
 /**
@@ -173,6 +195,19 @@ export const getSelectedOptionName = (
   );
   
   return option ? option.name : "";
+};
+
+/**
+ * Get the service package name by ID
+ */
+export const getServicePackageName = (servicePackageId: string): string => {
+  if (!servicePackageId || servicePackageId === 'none') return "";
+  
+  const servicePackage = servicePackagesData.find(
+    pkg => pkg.id === servicePackageId
+  );
+  
+  return servicePackage ? servicePackage.name : "";
 };
 
 /**

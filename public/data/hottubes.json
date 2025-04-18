@@ -54,9 +54,14 @@
       "seating": "8",
       "dimensions": "274.32 cm x 231.14 cm x 96.52 cm",
       "jets": "74 (1 Atlas® masaż karku, 56 Euro, 7 VersaSsage®, 4 AdaptaSsage®, 4 Euro-Pulse®, 2 OrbiSsage®, 1 Euphoria® dysza)",
-      "watercare": "System FreshWater® IQ w zestawie",
+      "watercare": "System FreshWater Salt System w zestawie",
       "usermanualURL": "https://www.calderaspas.com/utopia-owners-manual",
       "extras": [
+          {
+              "name": "Lezanka",
+              "description": "Wygodny fotel wypoczynkowy do masażu całego ciała",
+              "value": "Tak (fotel wypoczynkowy z regulacją)"
+            },
         {
           "name": "System UltraMasseuse®",
           "description": "Zaawansowany system sekwencyjnego masażu dostępny wyłącznie w modelu Cantabria",
@@ -197,9 +202,14 @@
       "seating": "6",
       "dimensions": "226.06 cm x 226.06 cm x 96.52 cm",
       "jets": "55 (40 Euro, 4 VersaSsage®, 4 AdaptaSsage®, 1 AdaptaFlo®, 2 Euro-Pulse®, 2 OrbiSsage®, 2 Euphoria® dysze)",
-      "watercare": "System FreshWater® IQ w zestawie",
+      "watercare": "System FreshWater Salt System w zestawie",
       "usermanualURL": "https://www.calderaspas.com/utopia-owners-manual",
       "extras": [
+          {
+              "name": "Lezanka",
+              "description": "Wygodny fotel wypoczynkowy do masażu całego ciała",
+              "value": "Tak (fotel wypoczynkowy z regulacją)"
+            },
         {
           "name": "Fotel UltraMassage®",
           "description": "Fotel do terapii całego ciała z dedykowanymi dyszami",
@@ -340,7 +350,7 @@
       "seating": "7",
       "dimensions": "226.06 cm x 226.06 cm x 96.52 cm",
       "jets": "52 (38 Euro, 4 VersaSsage®, 2 AdaptaFlo®, 4 Euro-Pulse®, 2 OrbiSsage®, 2 Euphoria® dysze)",
-      "watercare": "System FreshWater® IQ w zestawie",
+      "watercare": "System FreshWater Salt System w zestawie",
       "usermanualURL": "https://www.calderaspas.com/utopia-owners-manual",
       "extras": [
         {
@@ -483,9 +493,14 @@
       "seating": "6",
       "dimensions": "213.36 cm x 213.36 cm x 91.44 cm",
       "jets": "48 (36 Euro, 4 VersaSsage®, 2 AdaptaSsage®, 2 AdaptaFlo®, 2 OrbiSsage®, 2 Euphoria® dysze)",
-      "watercare": "System FreshWater® IQ w zestawie",
+      "watercare": "System FreshWater Salt System w zestawie",
       "usermanualURL": "https://www.calderaspas.com/utopia-owners-manual",
       "extras": [
+          {
+              "name": "Lezanka",
+              "description": "Wygodny fotel wypoczynkowy do masażu całego ciała",
+              "value": "Tak (fotel wypoczynkowy z regulacją)"
+            },
         {
           "name": "Fotel UltraMassage®",
           "description": "Ergonomiczny fotel wypoczynkowy z dyszami masażu całego ciała",
@@ -626,7 +641,7 @@
       "seating": "6",
       "dimensions": "213.36 cm x 213.36 cm x 91.44 cm",
       "jets": "46 (32 Euro, 4 VersaSsage®, 4 AdaptaSsage®, 2 Euro-Pulse®, 2 OrbiSsage®, 2 Euphoria® dysze)",
-      "watercare": "System FreshWater® IQ w zestawie",
+      "watercare": "System FreshWater Salt System w zestawie",
       "usermanualURL": "https://www.calderaspas.com/utopia-owners-manual",
       "extras": [
         {
@@ -769,9 +784,14 @@
       "seating": "3",
       "dimensions": "213.36 cm x 167.64 cm x 83.82 cm",
       "jets": "39 (30 Euro, 4 VersaSsage®, 2 Euro-Pulse®, 2 OrbiSsage®, 1 Euphoria® dysza)",
-      "watercare": "System FreshWater® IQ w zestawie",
+      "watercare": "System FreshWater Salt System w zestawie",
       "usermanualURL": "https://www.calderaspas.com/utopia-owners-manual",
       "extras": [
+          {
+              "name": "Lezanka",
+              "description": "Wygodny fotel wypoczynkowy do masażu całego ciała",
+              "value": "Tak (fotel wypoczynkowy z regulacją)"
+            },
         {
           "name": "Fotel UltraMassage®",
           "description": "Fotel wypoczynkowy do spa dla 3 osób",
@@ -912,7 +932,7 @@
       "seating": "6",
       "dimensions": "226.06 cm x 226.06 cm x 91.44 cm",
       "jets": "46 (37 Euro, 6 VersaSsage®, 2 AdaptaFlo®, 1 Euphoria® dysza)",
-      "watercare": "System FreshWater® IQ gotowy",
+      "watercare": "System FreshWater® opcjonlanie",
       "usermanualURL": "https://www.calderaspas.com/paradise-owners-manual",
       "extras": [
         {
@@ -1047,7 +1067,7 @@
       "seating": "7",
       "dimensions": "226.06 cm x 226.06 cm x 91.44 cm",
       "jets": "40 (29 Euro, 6 VersaSsage®, 4 AdaptaFlo®, 1 Euphoria® dysza)",
-      "watercare": "System FreshWater® IQ gotowy",
+      "watercare": "System FreshWater® opcjonlanie",
       "usermanualURL": "https://www.calderaspas.com/paradise-owners-manual",
       "extras": [
         {
@@ -1182,7 +1202,7 @@
       "seating": "7",
       "dimensions": "213.36 cm x 213.36 cm x 91.44 cm",
       "jets": "38 (28 Euro, 6 VersaSsage®, 2 AdaptaSsage®, 1 AdaptaFlo®, 1 Euphoria® dysza)",
-      "watercare": "System FreshWater® IQ gotowy",
+      "watercare": "System FreshWater® opcjonlanie",
       "usermanualURL": "https://www.calderaspas.com/paradise-owners-manual",
       "extras": [
         {
@@ -1317,7 +1337,7 @@
       "seating": "6",
       "dimensions": "213.36 cm x 213.36 cm x 91.44 cm",
       "jets": "43 (34 Euro, 5 VersaSsage®, 2 AdaptaSsage®, 1 AdaptaFlo®, 1 Euphoria® dysza)",
-      "watercare": "System FreshWater® IQ gotowy",
+      "watercare": "System FreshWater® opcjonlanie",
       "usermanualURL": "https://www.calderaspas.com/paradise-owners-manual",
       "extras": [
         {
@@ -1452,7 +1472,7 @@
       "seating": "5",
       "dimensions": "226.06 cm x 193.04 cm x 86.36 cm",
       "jets": "34 (24 Euro, 7 VersaSsage®, 2 AdaptaSsage®, 1 AdaptaFlo® dysza)",
-      "watercare": "System FreshWater® IQ gotowy",
+      "watercare": "System FreshWater® opcjonlanie",
       "usermanualURL": "https://www.calderaspas.com/paradise-owners-manual",
       "extras": [
         {
@@ -1587,7 +1607,7 @@
         "seating": "3",
         "dimensions": "226.06 cm x 193.04 cm x 86.36 cm",
         "jets": "31 (24 Euro, 5 VersaSsage®, 2 Euro-Pulse®)",
-        "watercare": "System FreshWater® IQ gotowy",
+        "watercare": "System FreshWater® opcjonlanie",
         "usermanualURL": "https://www.calderaspas.com/paradise-owners-manual",
         "extras": [
           {
@@ -2378,7 +2398,7 @@
       "seating": "2",
       "dimensions": "162.56 cm x 162.56 cm x 73.66 cm",
       "jets": "14 (8 Euro, 6 AdaptaFlo® dysze)",
-      "watercare": "System FreshWater® IQ gotowy",
+      "watercare": "System FreshWater® opcjonlanie",
       "usermanualURL": "https://www.calderaspas.com/vacanza-owners-manual",
       "extras": [
         {

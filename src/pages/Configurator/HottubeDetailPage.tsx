@@ -32,8 +32,10 @@ import {
   calculateAdditionalCosts, 
   calculateTotalPrice, 
   getSelectedOptionName, 
-  initializeAccessoriesData
+  initializeAccessoriesData,
+  initializeServicePackagesData 
 } from "../../utils/pricingCalculator";
+import { initializeServicePackagesForPdf } from "../../utils/pdfGenerator";
 
 const HottubeDetailPage = () => {
   const { t } = useTranslation();
@@ -55,6 +57,14 @@ const HottubeDetailPage = () => {
       initializeAccessoriesData(availableAccessories);
     }
   }, [availableAccessories]);
+
+  // Initialize service packages data when available
+  useEffect(() => {
+    if (servicePackages && servicePackages.length > 0) {
+      initializeServicePackagesData(servicePackages);
+      initializeServicePackagesForPdf(servicePackages);
+    }
+  }, [servicePackages]);
 
   useEffect(() => {
     if (!hottubsLoading && !hottub && hottubId) {
@@ -145,7 +155,7 @@ const HottubeDetailPage = () => {
 
       accessoryPrices["steps"] = {
         selected: false,
-        price: 349
+        price: 1200
       };
 
       setAccessoriesWithPrices(accessoryPrices);
@@ -248,7 +258,7 @@ const HottubeDetailPage = () => {
     });
   };
 
-  const handleGeneratePDF = () => {
+  const handleGeneratePDF = async () => {
     if (!hottub) return;
     const selectedShellColor = hottub.colors.shellColors[shellIndex];
     const selectedCabinetColor = hottub.colors.cabinetColors[cabinetIndex];
@@ -271,38 +281,47 @@ const HottubeDetailPage = () => {
     // Generate shareable link for the configuration
     const configurationUrl = generateShareableLink();
     
-    generateHotTubPDF({
-      modelName: hottub.model,
-      collection: hottub.collection,
-      shellColorName: selectedShellColor.name,
-      cabinetColorName: selectedCabinetColor.color,
-      seating: hottub.seating,
-      basePrice: hottub.price,
-      totalPrice: calculateTotalPrice(hottub, selectedWaterCareId, selectedEntertainmentId, selectedControlId, accessories, servicePackage),
-      additionalOptions: {
-        waterCare: waterCareOption ? {
-          name: waterCareOption.name,
-          price: waterCareOption.price
-        } : undefined,
-        entertainmentSystem: entertainmentOption ? {
-          name: entertainmentOption.name,
-          price: entertainmentOption.price
-        } : undefined,
-        controlSystem: controlOption ? {
-          name: controlOption.name,
-          price: controlOption.price
-        } : undefined,
-      },
-      accessories: accessoriesWithPrices,
-      servicePackage,
-      configurationUrl: configurationUrl,
-    });
-    
-    setSnackbar({
-      open: true,
-      message: t('hottub.pdfGenerated', "Wycena przygotowana do pobrania!"),
-      severity: "success",
-    });
+    try {
+      await generateHotTubPDF({
+        modelName: hottub.model,
+        collection: hottub.collection,
+        shellColorName: selectedShellColor.name,
+        cabinetColorName: selectedCabinetColor.color,
+        seating: hottub.seating,
+        basePrice: hottub.price,
+        totalPrice: calculateTotalPrice(hottub, selectedWaterCareId, selectedEntertainmentId, selectedControlId, accessories, servicePackage),
+        additionalOptions: {
+          waterCare: waterCareOption ? {
+            name: waterCareOption.name,
+            price: waterCareOption.price
+          } : undefined,
+          entertainmentSystem: entertainmentOption ? {
+            name: entertainmentOption.name,
+            price: entertainmentOption.price
+          } : undefined,
+          controlSystem: controlOption ? {
+            name: controlOption.name,
+            price: controlOption.price
+          } : undefined,
+        },
+        accessories: accessoriesWithPrices,
+        servicePackage,
+        configurationUrl: configurationUrl,
+      });
+      
+      setSnackbar({
+        open: true,
+        message: t('hottub.pdfGenerated', "Wycena przygotowana do pobrania!"),
+        severity: "success",
+      });
+    } catch (error) {
+      console.error("Error generating PDF:", error);
+      setSnackbar({
+        open: true,
+        message: t('hottub.pdfError', "Wystąpił błąd podczas generowania PDF"),
+        severity: "error",
+      });
+    }
   };
 
   const handleSnackbarClose = () => {
@@ -377,6 +396,7 @@ const HottubeDetailPage = () => {
           <Box sx={{ p: 3 }}>
             <Box sx={{ mb: 2, display: "flex", alignItems: "center" }}>
               <Button
+                variant="outlined"
                 startIcon={<ArrowBackIcon />}
                 onClick={() => navigate("/configurator")}
               >
@@ -398,6 +418,7 @@ const HottubeDetailPage = () => {
                 shellColorName={selectedShellColor.name}
                 cabinetImage={selectedCabinetColor.cabinetIMG}
                 cabinetColorName={selectedCabinetColor.color}
+                configLink={generateShareableLink()}
               />
             </Box>
           </Box>
@@ -597,6 +618,7 @@ const HottubeDetailPage = () => {
               servicePackage={servicePackage}
               onShare={handleShare}
               onGeneratePDF={handleGeneratePDF}
+              configLink={generateShareableLink()}
             />
           </Box>
         </Paper>

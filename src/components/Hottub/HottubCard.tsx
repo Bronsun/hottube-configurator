@@ -62,6 +62,7 @@ const HottubCard = ({
           justifyContent: "center",
           p: 2,
           backgroundColor: "#f5f5f5",
+          position: "relative",
         }}
       >
         <CardMedia
@@ -69,6 +70,8 @@ const HottubCard = ({
           sx={{
             objectFit: "contain",
             zIndex: 2,
+            position: hottub.model === "Aventine" ? "relative" : "static",
+            top: hottub.model === "Aventine" ? "20px" : "auto",
           }}
           image={shellColor.shellIMG}
           alt={`${hottub.model} shell - ${shellColor.name}`}
@@ -79,6 +82,9 @@ const HottubCard = ({
             objectFit: "contain",
             textAlign: "center",
             zIndex: 1,
+            position: hottub.model === "Aventine" ? "relative" : "static",
+            top: hottub.model === "Aventine" ? "-35px" : "auto",
+            transform: hottub.model === "Aventine" ? "scale(1.05)" : "none",
           }}
           image={cabinetColor.cabinetIMG}
           alt={`${hottub.model} cabinet - ${cabinetColor.color}`}
@@ -108,7 +114,7 @@ const HottubCard = ({
           {/* Lounge Seat Indicator */}
           {hasLoungeSeat() && (
             <Chip
-              label="Lounge Seat"
+              label="Leżanka"
               size="small"
               color="secondary"
               sx={{ mb: 2 }}

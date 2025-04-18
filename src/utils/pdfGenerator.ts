@@ -1,5 +1,17 @@
 import jsPDF from 'jspdf';
 import 'jspdf-autotable';
+import { ServicePackage } from './hottubes';
+
+// Global store for service packages data
+let servicePackagesData: ServicePackage[] = [];
+
+/**
+ * Initialize service packages data for PDF
+ * @param packages Array of service packages to use for pricing and name lookups
+ */
+export const initializeServicePackagesForPdf = (packages: ServicePackage[]): void => {
+  servicePackagesData = packages;
+};
 
 interface HotTubDetails {
   modelName: string;
@@ -94,9 +106,9 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
     doc.text(label + ":", leftMargin, yPos + 5);
     
     // Value on the right
-    doc.setFont("", 'bold');
+    doc.setFont("Helvetica", 'bold');
     doc.text(value, leftMargin + 100, yPos + 5);
-    doc.setFont("", 'normal');
+    doc.setFont("Helvetica", 'normal');
     
     return yPos + 10;
   };
@@ -152,28 +164,17 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
       }
     }
     
-    // Process service package
-    let servicePackagePrice = 0;
-    let packageName = '';
-    
+    // Process service package - Use servicePackagesData to get correct price and name
     if (details.servicePackage !== 'none') {
-      switch(details.servicePackage) {
-        case 'one-year':
-          packageName = 'Pakiet opieki rocznej';
-          servicePackagePrice = 500;
-          break;
-        case 'three-year':
-          packageName = '3-letni pakiet premium';
-          servicePackagePrice = 1200;
-          break;
-        case 'five-year':
-          packageName = '5-letni pakiet Elite';
-          servicePackagePrice = 1800;
-          break;
-      }
+      const selectedPackage = servicePackagesData.find(pkg => pkg.id === details.servicePackage);
       
-      yPosition = addOptionRow('Pakiet serwisowy', 
-        `${packageName} (+${servicePackagePrice.toLocaleString()} PLN)`, yPosition);
+      if (selectedPackage) {
+        const packageName = selectedPackage.name;
+        const servicePackagePrice = selectedPackage.price;
+        
+        yPosition = addOptionRow('Pakiet serwisowy', 
+          `${packageName} (+${servicePackagePrice.toLocaleString()} PLN)`, yPosition);
+      }
     }
   }
   
@@ -202,18 +203,11 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
     }
   });
   
-  // Add service package cost
+  // Add service package cost - Use servicePackagesData to get correct price
   if (details.servicePackage !== 'none') {
-    switch(details.servicePackage) {
-      case 'one-year':
-        totalAdditionalCost += 500;
-        break;
-      case 'three-year':
-        totalAdditionalCost += 1200;
-        break;
-      case 'five-year':
-        totalAdditionalCost += 1800;
-        break;
+    const selectedPackage = servicePackagesData.find(pkg => pkg.id === details.servicePackage);
+    if (selectedPackage) {
+      totalAdditionalCost += selectedPackage.price;
     }
   }
   
@@ -247,9 +241,9 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
   doc.text('Cena calkowita:', leftMargin, yPosition + 5);
   
   doc.setFontSize(14);
-  doc.setFont("", 'bold');
+  doc.setFont("Helvetica", 'bold');
   doc.text(`${calculatedTotal.toLocaleString()} PLN`, leftMargin + 100, yPosition + 5);
-  doc.setFont("", 'normal');
+  doc.setFont("Helvetica", 'normal');
   
   // Add company information
   const footerY = doc.internal.pageSize.height - 40;
