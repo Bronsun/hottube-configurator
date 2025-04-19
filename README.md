@@ -51,28 +51,7 @@ npm run dev
 4. View the configuration summary and total price
 5. Generate a PDF quote or share your configuration via link or email
 
-## Building for Production
 
-```bash
-# Build for production
-npm run build
-
-# Preview the production build
-npm run preview
-```
-
-## Docker Deployment
-
-```bash
-# Build the project
-npm run build
-
-# Build Docker image
-docker build --platform linux/amd64 -f Dockerfile -t bozen/app-web .
-
-# Save Docker image
-docker save bozen/app-web | gzip -c > bozen-app-web.tgz
-```
 
 ## WordPress Integration
 
@@ -137,9 +116,3 @@ export default tseslint.config({
   },
 })
 ```
-
-# Docker build
-
-    npm run build
-    docker build --platform linux/amd64 -f Dockerfile -t bozen/app-web .
-    docker save bozen/app-web | gzip -c > bozen-app-web.tgz
