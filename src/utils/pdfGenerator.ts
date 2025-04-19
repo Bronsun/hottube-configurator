@@ -49,6 +49,11 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
   // Create a new PDF document
   const doc = new jsPDF();
   
+  // Define page dimensions and safe margins
+  const pageHeight = doc.internal.pageSize.height;
+  const footerHeight = 50; // Space reserved for footer
+  const safeContentHeight = pageHeight - footerHeight; // Max position for content before footer
+  
   // Add MountSPA logo
   const logoWidth = 40;
   const logoHeight = 20;
@@ -84,9 +89,18 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
   let yPosition = 60;
   const leftMargin = 20;
   const pageWidth = doc.internal.pageSize.width - 40; // 40 = 20 margin on each side
+  let currentPage = 1;
   
   // Function to create a section with title
   const createSection = (title: string, yPos: number): number => {
+    // Check if we need a new page
+    if (yPos + 20 > safeContentHeight) { // Allow enough space for title + first item
+      addFooter(doc, currentPage);
+      doc.addPage();
+      currentPage++;
+      yPos = 20; // Reset Y position for new page
+    }
+    
     // Draw section title with background
     const titleHeight = 10;
     doc.setFillColor(43, 95, 117); // Blue-teal from theme
@@ -101,6 +115,14 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
   
   // Function to add an option row
   const addOptionRow = (label: string, value: string, yPos: number): number => {
+    // Check if we need a new page
+    if (yPos + 10 > safeContentHeight) {
+      addFooter(doc, currentPage);
+      doc.addPage();
+      currentPage++;
+      yPos = 20; // Reset Y position for new page
+    }
+    
     doc.setFontSize(11);
     doc.setTextColor(0); // Black text
     doc.text(label + ":", leftMargin, yPos + 5);
@@ -111,6 +133,56 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
     doc.setFont("Helvetica", 'normal');
     
     return yPos + 10;
+  };
+  
+  // Function to add footer to current page
+  const addFooter = (pdfDoc: jsPDF, pageNum: number): void => {
+    const footerY = pdfDoc.internal.pageSize.height - 40;
+    
+    // Add company information
+    pdfDoc.setFontSize(12);
+    pdfDoc.setTextColor(43, 95, 117); // Blue-teal from theme
+    pdfDoc.text('MountSPA', 15, footerY);
+    
+    pdfDoc.setFontSize(10);
+    pdfDoc.setTextColor(80);
+    pdfDoc.text('Szaflarska 8', 15, footerY + 5);
+    pdfDoc.text('34-400 Nowy Targ', 15, footerY + 10);
+    pdfDoc.text('', 15, footerY + 15);
+    pdfDoc.text('info@mountspa.pl', 15, footerY + 20);
+    pdfDoc.text('+48 502 291 397', 15, footerY + 25);
+    
+    // Add contact button
+    const contactBtnY = footerY + 5;
+    const contactBtnWidth = 80;
+    const contactBtnHeight = 10;
+    const contactBtnX = pdfDoc.internal.pageSize.width - contactBtnWidth - 15;
+    
+    // Draw button background
+    pdfDoc.setFillColor(236, 140, 63); // Orange from theme
+    pdfDoc.rect(contactBtnX, contactBtnY, contactBtnWidth, contactBtnHeight, 'F');
+    
+    // Add button text
+    pdfDoc.setFontSize(10);
+    pdfDoc.setTextColor(255);
+    pdfDoc.text('Kontakt do MountSPA', contactBtnX + (contactBtnWidth/2), contactBtnY + 6, { align: 'center' });
+    
+    // Add clickable area for the button
+    pdfDoc.link(contactBtnX, contactBtnY, contactBtnWidth, contactBtnHeight, { url: 'https://mountspa.pl/kontakt' });
+    
+    // Add page number
+    pdfDoc.setFontSize(10);
+    pdfDoc.setTextColor(100);
+    pdfDoc.text(`Strona ${pageNum}`, pdfDoc.internal.pageSize.width - 20, pdfDoc.internal.pageSize.height - 10, { align: 'right' });
+    
+    // Add footer text
+    pdfDoc.text('Dziekujemy za skonfigurowanie wanny SPA w Mount SPA', 105, pdfDoc.internal.pageSize.height - 10, { align: 'center' });
+    
+    if (pageNum === 1) {
+      pdfDoc.setFontSize(10);
+      pdfDoc.setTextColor(100);
+      pdfDoc.text("Niniejsza symulacja nie stanowi oferty w rozumieniu art. 66 Kodeksu cywilnego.", 110, pdfDoc.internal.pageSize.height - 20, { align: 'center' });
+    }
   };
   
   // Main configuration section
@@ -229,6 +301,14 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
   yPosition = addOptionRow('Dodatkowe funkcje', 
     `${totalAdditionalCost.toLocaleString()} PLN`, yPosition);
   
+  // Check if we need a new page for total price section
+  if (yPosition + 20 > safeContentHeight) {
+    addFooter(doc, currentPage);
+    doc.addPage();
+    currentPage++;
+    yPosition = 20;
+  }
+  
   // Total price with highlight
   yPosition += 5;
   doc.setDrawColor(236, 140, 63); // Orange from theme
@@ -245,46 +325,8 @@ export const generateHotTubPDF = (details: HotTubDetails): void => {
   doc.text(`${calculatedTotal.toLocaleString()} PLN`, leftMargin + 100, yPosition + 5);
   doc.setFont("Helvetica", 'normal');
   
-  // Add company information
-  const footerY = doc.internal.pageSize.height - 40;
-  doc.setFontSize(12);
-  doc.setTextColor(43, 95, 117); // Blue-teal from theme
-  doc.text('MountSPA', 15, footerY);
-  
-  doc.setFontSize(10);
-  doc.setTextColor(80);
-  doc.text('Szaflarska 8', 15, footerY + 5);
-  doc.text('34-400 Nowy Targ', 15, footerY + 10);
-  doc.text('', 15, footerY + 15);
-  doc.text('info@mountspa.pl', 15, footerY + 20);
-  doc.text('+48 502 291 397', 15, footerY + 25);
-  
-  // Add contact button
-  const contactBtnY = footerY + 5;
-  const contactBtnWidth = 80;
-  const contactBtnHeight = 10;
-  const contactBtnX = doc.internal.pageSize.width - contactBtnWidth - 15;
-  
-  // Draw button background
-  doc.setFillColor(236, 140, 63); // Orange from theme
-  doc.rect(contactBtnX, contactBtnY, contactBtnWidth, contactBtnHeight, 'F');
-  
-  // Add button text
-  doc.setFontSize(10);
-  doc.setTextColor(255);
-  doc.text('Kontakt do MountSPA', contactBtnX + (contactBtnWidth/2), contactBtnY + 6, { align: 'center' });
-  
-  // Add clickable area for the button
-  doc.link(contactBtnX, contactBtnY, contactBtnWidth, contactBtnHeight, { url: 'https://mountspa.pl/kontakt' });
-  
-  // Add footer text
-  doc.setFontSize(10);
-  doc.setTextColor(100);
-  doc.text('Dziekujemy za skonfigurowanie wanny SPA w Mount SPA', 105, doc.internal.pageSize.height - 10, { align: 'center' });
-  
-  doc.setFontSize(10);
-  doc.setTextColor(100);
-  doc.text("Niniejsza symulacja nie stanowi oferty w rozumieniu art. 66 Kodeksu cywilnego.", 110, doc.internal.pageSize.height - 20, { align: 'center' });
+  // Add footer to the last page
+  addFooter(doc, currentPage);
   
   // Save the PDF with model name
   doc.save(`MountSPA-${details.modelName}-Konfiguracja.pdf`);

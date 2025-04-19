@@ -131,6 +131,16 @@ const HottubPricing: React.FC<HottubPricingProps> = ({
         onSuccess={handleFormSuccess}
         hottubModel={hottub?.model || ''}
         configLink={configLink}
+        hottubConfig={{
+          model: hottub?.model || '',
+          collection: hottub?.collection || '',
+          price: totalPrice,
+          waterCareId: selectedWaterCareId,
+          entertainmentId: selectedEntertainmentId,
+          controlId: selectedControlId,
+          accessories: accessories,
+          servicePackage: servicePackage
+        }}
       />
     </Box>
   );

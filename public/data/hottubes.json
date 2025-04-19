@@ -1737,7 +1737,7 @@
       "seating": "6",
       "dimensions": "226.06 cm x 226.06 cm x 97.79 cm",
       "jets": "45 (35 Euro, 6 AdaptaFlo®, 4 AdaptaSsage® dysze)",
-      "watercare": "System FreshWater® Salt System gotowy",
+      "watercare": "System FreshWater® Salt Klasyczny chlor lub system FreshWater",
       "usermanualURL": "https://www.calderaspas.com/vacanza-owners-manual",
       "extras": [
         {
@@ -1872,7 +1872,7 @@
       "seating": "6",
       "dimensions": "213.36 cm x 213.36 cm x 91.44 cm",
       "jets": "35 (27 Euro, 5 AdaptaFlo®, 3 AdaptaSsage® dysze)",
-      "watercare": "System FreshWater® Salt System gotowy",
+      "watercare": "System FreshWater® Salt Klasyczny chlor lub system FreshWater",
       "usermanualURL": "https://www.calderaspas.com/vacanza-owners-manual",
       "extras": [
         {
@@ -1891,9 +1891,9 @@
           "value": "1 wodospad"
         },
         {
-          "name": "System wodny in-line",
-          "description": "System bromowy i mineralny Frog® @ease in-line (opcjonalny)",
-          "value": "System gotowy do wkładu"
+          "name": "System wodny",
+          "description": "Chlor lub system FreshWater",
+          "value": "FreshWater® opcjonalnie"
         }
       ],
       "additionalOptions": {
@@ -2007,7 +2007,7 @@
       "seating": "7",
       "dimensions": "213.36 cm x 213.36 cm x 91.44 cm",
       "jets": "35 (27 Euro, 5 AdaptaFlo®, 3 AdaptaSsage® dysze)",
-      "watercare": "System FreshWater® Salt System gotowy",
+      "watercare": "System FreshWater® Salt Klasyczny chlor lub system FreshWater",
       "usermanualURL": "https://www.calderaspas.com/vacanza-owners-manual",
       "extras": [
         {
@@ -2142,7 +2142,7 @@
         "seating": "5",
         "dimensions": "208 cm x 208 cm x 84 cm",
         "jets": "23 (17 Euro, 4 AdaptaFlo™, 2 AdaptaSsage™ dysze)",
-        "watercare": "System FreshWater® Salt System gotowy",
+        "watercare": "System FreshWater® Salt Klasyczny chlor lub system FreshWater",
         "usermanualURL": "https://www.calderaspas.com/vacanza-owners-manual",
         "extras": [
         {
@@ -2278,7 +2278,7 @@
       "seating": "3",
       "dimensions": "213.36 cm x 165.10 cm x 73.66 cm",
       "jets": "18 (14 Euro, 3 AdaptaFlo®, 1 AdaptaSsage® dysza)",
-      "watercare": "System FreshWater® Salt System gotowy",
+      "watercare": "System FreshWater® Salt Klasyczny chlor lub system FreshWater",
       "usermanualURL": "https://www.calderaspas.com/vacanza-owners-manual",
       "extras": [
         {
@@ -2298,8 +2298,8 @@
         },
         {
           "name": "System wodny",
-          "description": "System Frog® @ease in-line SmartChlor® (opcjonalne wkłady)",
-          "value": "System gotowy do wkładu"
+          "description": "Klasyczny chlor lub system FreshWater",
+          "value": "FreshWater® opcjonalnie"
         }
       ],
       "additionalOptions": {

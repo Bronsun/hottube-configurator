@@ -82,7 +82,7 @@ const HottubeDetailPage = () => {
   const [servicePackage, setServicePackage] = useState("none");
 
   // Define the type for accessoriesWithPrices so it's not an empty object
-  const [accessoriesWithPrices, setAccessoriesWithPrices] = useState<{[key: string]: {selected: boolean, price: number}}>({});
+  const [, setAccessoriesWithPrices] = useState<{[key: string]: {selected: boolean, price: number}}>({});
 
   // UI state
   const [shareDialogOpen, setShareDialogOpen] = useState(false);
@@ -281,6 +281,26 @@ const HottubeDetailPage = () => {
     // Generate shareable link for the configuration
     const configurationUrl = generateShareableLink();
     
+    // Update accessoriesWithPrices to match current selection
+    const updatedAccessories: {[key: string]: {selected: boolean, price: number}} = {};
+    
+    // Add accessories from availableAccessories
+    availableAccessories.forEach(acc => {
+      updatedAccessories[acc.id] = {
+        selected: !!accessories[acc.id],
+        price: acc.price
+      };
+    });
+    
+    // Add legacy accessories
+    if (accessories.coverCradle) {
+      updatedAccessories.coverCradle = { selected: true, price: 899 };
+    }
+    
+    if (accessories.steps) {
+      updatedAccessories.steps = { selected: true, price: 1200 };
+    }
+    
     try {
       await generateHotTubPDF({
         modelName: hottub.model,
@@ -304,7 +324,7 @@ const HottubeDetailPage = () => {
             price: controlOption.price
           } : undefined,
         },
-        accessories: accessoriesWithPrices,
+        accessories: updatedAccessories,
         servicePackage,
         configurationUrl: configurationUrl,
       });
@@ -630,6 +650,25 @@ const HottubeDetailPage = () => {
         onClose={() => setShareDialogOpen(false)}
         shareableLink={generateShareableLink()}
         onCopySuccess={handleCopyLinkSuccess}
+        hottubModel={hottub.model}
+        availableAccessories={availableAccessories}
+        hottubConfig={{
+          model: hottub?.model || '',
+          collection: hottub?.collection || '',
+          price: calculateTotalPrice(
+            hottub, 
+            selectedWaterCareId, 
+            selectedEntertainmentId, 
+            selectedControlId, 
+            accessories, 
+            servicePackage
+          ),
+          waterCareId: selectedWaterCareId,
+          entertainmentId: selectedEntertainmentId,
+          controlId: selectedControlId,
+          accessories: accessories,
+          servicePackage: servicePackage
+        }}
       />
 
       <Snackbar

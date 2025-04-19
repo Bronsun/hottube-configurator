@@ -169,7 +169,7 @@ const HottubeSummary = ({
             {t('hottub.summary.basePrice')}: {basePrice}
           </Typography>
           <Typography variant="body2">
-            {t('hottub.summary.options')}: +${additionalCost.toLocaleString()}
+            {t('hottub.summary.options')}: +{additionalCost.toLocaleString()}
           </Typography>
         </Box>
       )}
